@@ -65,10 +65,6 @@
     <!-- Authentication -->
     <xml name='askomics_auth'>
         <section name='auth' title='AskOmics authentication' expanded='True'>
-            <param name='username'
-                   type='text'
-                   label='Username'
-                   argument='-u' />
             <param name='apikey'
                    type='text'
                    label='API key'
@@ -76,7 +72,6 @@
         </section>
     </xml>
 
-    <token name='@USERNAME@'><![CDATA['$auth.username']]></token>
     <token name='@APIKEY@'><![CDATA['$auth.apikey']]></token>
 
     <!-- Tests -->
@@ -88,7 +83,6 @@
     </xml>
     <xml name='test_asko_auth'>
         <section name='auth'>
-            <param name='username' value='jdoe' />
             <param name='apikey' value='00000000000000000000' />
         </section>
     </xml>
