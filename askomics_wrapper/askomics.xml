@@ -26,12 +26,27 @@
             -p @ENV_PORT@
         #end if
 
-        -k @APIKEY@
         --file-type '$input_format.format'
+
+        #if $input_format.opt.col_type
+            -c $input_format.opt.col_type
+        #end if
+
+        #if $input_format.opt.key_col
+            --key-columns $input_format.opt.key_col
+        #end if
+
+        #if $input_format.opt.dis_col
+            --disabled-columns $input_format.opt.dis_col
+        #end if
+
         #if $input_format.format == "gff"
-            -e '$input_format.ent'
+            -e $input_format.ent
             -t '$input_format.tax'
         #end if
+
+        -k @APIKEY@
+
         '$input'
         > '$output'
     ]]></command>
@@ -48,6 +63,11 @@
             </param>
            <when value="csv">
                <param format="tabular" name="input" type="data" label="Dataset to integrate" argument="-d"  />
+               <section name='opt' title='Optional fields' expanded='false'>
+                   <param name="col_type" type="text" value="" optional="true" label="Columns types (separated with space)" argument="-c"/>
+                   <param name="key_col" type="text" value="" optional="true" label="Key columns (separated with space)" argument="--key-columns"/>
+                   <param name="dis_col" type="text" value="" optional="true" label="Disabled columns (separated with space)" argument="--disabled-columns"/>
+                </section>
             </when>
             <when value="gff">
                 <param format="gff3" name="input" type="data" label="Dataset to integrate" argument="-d"  />
